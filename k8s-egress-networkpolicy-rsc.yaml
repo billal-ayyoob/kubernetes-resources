@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      networking/allow-internet-egress: "true"
+      networking/allow-internet-egress: "true/false"
   egress:
   - {}
   policyTypes:

@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: sensdash-ingress
+  name: ingress-name
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "static-ip"
     networking.gke.io/managed-certificates: "certificate-name"
@@ -11,5 +11,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: svc-name
-          servicePort: 80
+          serviceName: service-name
+          servicePort: 8080

@@ -24,10 +24,6 @@ spec:
         io.kompose.network/appnet: "true"
         io.kompose.service: app-name
     spec:
-      volumes:
-      - name: google-cloud-key
-        secret:
-          secretName: secret-name
       containers:
         - env:
             - name: APP_DEBUG
@@ -58,8 +54,6 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_PORT
                   name: env
-            - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /var/secrets/google/key.json
           image: gcr.io/$PROJECT_ID/img-name:tag
           imagePullPolicy: IfNotPresent
           name: container-name

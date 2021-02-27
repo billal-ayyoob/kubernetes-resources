@@ -1,11 +1,11 @@
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: app-backendconfig
+  name: backendconfig-name
 spec:
   healthCheck:
     checkIntervalSec: 60
     timeoutSec: 40
     type: HTTP
-    requestPath: /login
+    requestPath: /
     port: 80

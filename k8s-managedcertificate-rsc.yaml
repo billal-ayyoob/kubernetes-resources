@@ -1,7 +1,7 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: sensdashcrt
+  name: certificate-name
 spec:
   domains:
     - example.com
