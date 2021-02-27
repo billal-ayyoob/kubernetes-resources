@@ -5,15 +5,15 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.22.0 (955b78124)
   creationTimestamp: null
-  name: app-svc
+  name: svc-name
 spec:
   type: NodePort
   ports:
-  - name: "app-http-port"
+  - name: "svc-http-port"
     port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    io.kompose.service: app
+    io.kompose.service: app-name
 status:
   loadBalancer: {}
