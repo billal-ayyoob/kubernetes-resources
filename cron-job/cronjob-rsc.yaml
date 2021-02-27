@@ -48,9 +48,9 @@ spec:
               args:
                 - php
                 - artisan 
-                - queue:work 
+                - queue:queue-name 
                 - --stop-when-empty 
                 - --tries=1 
-                - --queue=sensor 
+                - --queue=queue-name
                 - --timeout=12000
           restartPolicy: Never

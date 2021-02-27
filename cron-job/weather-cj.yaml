@@ -35,6 +35,6 @@ spec:
             image: gcr.io/$PROJECT_ID/img-name:latest
             args:
               - python 
-              - weather.py
-              - 4475,9999
+              - file.py
+              - 1122,3344
           restartPolicy: Never
