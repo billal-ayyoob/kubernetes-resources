@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: jq-cj
+  name: cj-example
   namespace: default
 spec:
   schedule: "*/1 * * * *"
@@ -12,7 +12,7 @@ spec:
           labels:
             app: cronjob
         spec:
-          serviceAccountName: cj-melrok
+          serviceAccountName: svc-account-name
           containers:
             - env:
                 - name: APP_DEBUG
@@ -20,7 +20,7 @@ spec:
                 - name: APP_ENV
                   value: local
                 - name: APP_KEY
-                  value: '"base64:fHdJM1Ch7J2PhwPg59MmOuEOB5LirdieEapUqW7ucSY="'
+                  value: ''
                 - name: DB_DATABASE
                   valueFrom:
                     configMapKeyRef:
@@ -44,7 +44,7 @@ spec:
                       key: MYSQL_PORT
                       name: env
               name: sensormanagement
-              image: gcr.io/commission-299508/activek8s:v3
+              image: gcr.io/$PROJECT_ID/img-name:tag
               args:
                 - php
                 - artisan 

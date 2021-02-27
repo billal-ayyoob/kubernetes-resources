@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: weather-cj
+  name: example-cj
   namespace: default
 spec:
   schedule: "0 1 * * *"
@@ -10,7 +10,7 @@ spec:
       template:
         metadata:
           labels:
-            app: weather-api
+            app: cj-app
         spec:
           containers:
           - env:
@@ -31,8 +31,8 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: MYSQL_PASSWORD
-            name: weather-cj
-            image: gcr.io/commission-299508/weather-cj:latest
+            name: container-name
+            image: gcr.io/$PROJECT_ID/img-name:latest
             args:
               - python 
               - weather.py
