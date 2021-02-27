@@ -1,0 +1,56 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: jq-cj
+  namespace: default
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: cronjob
+        spec:
+          serviceAccountName: cj-melrok
+          containers:
+            - env:
+                - name: APP_DEBUG
+                  value: "true"
+                - name: APP_ENV
+                  value: local
+                - name: APP_KEY
+                  value: '"base64:fHdJM1Ch7J2PhwPg59MmOuEOB5LirdieEapUqW7ucSY="'
+                - name: DB_DATABASE
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MYSQL_DB
+                      name: env
+                - name: DB_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-secret
+                      key: MYSQL_USERNAME
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-secret
+                      key: MYSQL_PASSWORD
+                - name: DB_HOST
+                  value: db
+                - name: DB_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      key: MYSQL_PORT
+                      name: env
+              name: sensormanagement
+              image: gcr.io/commission-299508/activek8s:v3
+              args:
+                - php
+                - artisan 
+                - queue:work 
+                - --stop-when-empty 
+                - --tries=1 
+                - --queue=sensor 
+                - --timeout=12000
+          restartPolicy: Never

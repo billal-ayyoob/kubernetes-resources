@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  MYSQL_DB: db-name
+  MYSQL_PORT: db-port
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: app-env
+  name: env

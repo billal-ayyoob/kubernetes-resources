@@ -1,0 +1,40 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: weather-cj
+  namespace: default
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: weather-api
+        spec:
+          containers:
+          - env:
+            - name: DB_HOST
+              value: db
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: MYSQL_DB
+                  name: env
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            name: weather-cj
+            image: gcr.io/commission-299508/weather-cj:latest
+            args:
+              - python 
+              - weather.py
+              - 4475,9999
+          restartPolicy: Never
