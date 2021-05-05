@@ -36,5 +36,4 @@ spec:
             args:
               - python 
               - file.py
-              - 1122,3344
           restartPolicy: Never
